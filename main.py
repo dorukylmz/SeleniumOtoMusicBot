@@ -1,4 +1,6 @@
 from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.service import Service
 import time
 PATH="\\chromedriver.exe"
@@ -14,18 +16,15 @@ ser=Service(PATH)
 
 driver=webdriver.Chrome(options=driveroptions,service=ser)
 
+driver.get("https://www.google.com")
+time.sleep(3)
+driver.get("https://www.youtube.com/watch?v=wMzIHuWh_I0&list=RDwMzIHuWh_I0&start_radio=1")
 
-driver.get("https://downloads.adblockplus.org/devbuilds/adblockpluschrome/")
-
-time.sleep(6)
-
-driver.get("https://youtu.be/tEXYfT_G0W0")
-driver.implicitly_wait(10)
-
-time.sleep(2)
 print(driver.title)
-chwd=driver.current_window_handle
+chwd=driver.current_window_handle 
 driver.switch_to.window(chwd)
-
+time.sleep(2)
 while True:
-    pass
+    time.sleep(2)
+    nextbutton=driver.find_element(by=By.CSS_SELECTOR,value=".ytp-next-button.ytp-button")
+    nextbutton.click()
